@@ -34,3 +34,16 @@
         }
     }
 }
+
+#user {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: rem(50px);
+    .container {
+        margin: rem(30px);
+        p {
+            font-size: rem(20px);
+        }
+    }
+}

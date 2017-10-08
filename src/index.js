@@ -2,20 +2,35 @@ import './styles/style.scss'
 
 const searchBtn = document.getElementById('search-btn')
 const searchInput = document.getElementById('search-bar')
+// const username = document.getElementById('username')
+// const photo = document.getElementById('photo')
+// const following = document.getElementById('following')
+const user = document.getElementById('user')
 
 searchBtn.addEventListener('click', evt => {
   const value = searchInput.value
   getUser(value)
     .then(rawData => {
       const data = rawData.items
-      console.log(data[0])
-      const getData = data.map(mainData => {
-        return {
-          avatar_url: mainData.avatar_url,
-          following_url: mainData.following_url
-        }
-      })
-      console.log(getData)
+      // console.log(data[0])
+      const getData = data
+        .map(mainData => {
+          return {
+            login: mainData.login,
+            avatar_url: mainData.avatar_url
+          }
+        })
+        .map(data => {
+          let container = document.createElement('div')
+          container.classList = 'container'
+          let p = document.createElement('p')
+          p.innerText = data.login
+          container.appendChild(p)
+          user.appendChild(container)
+        })
+
+      // userdata.innerText = 'getData[0].login'
+      // photo.innerHTML = '<a href="#"><img src="mdn-logo-sm.png" alt="MDN"></a>'
     })
     .catch(err => console.log('err', err))
 })
