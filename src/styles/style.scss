@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+body {
+    background-color: #a0cbfc;
+}
+
 .search {
     display: flex;
     align-items: center;
@@ -23,12 +27,12 @@
     #search-btn {
         border: none;
         outline: none;
-        background-color: white;
+        background-color: #a0cbfc;
         margin: 0 0 0 rem(10px);
         img {
             height: rem(32px);
             border: none;
-            background-color: white;
+            background-color: #a0cbfc;
             padding: rem(2px) 0 0 0;
             margin: 0;
         }
@@ -39,11 +43,18 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
     margin: rem(50px);
     .container {
         margin: rem(30px);
         p {
             font-size: rem(20px);
+            text-align: center;
+            margin: 0 0 rem(10px) 0;
         }
+    }
+    img {
+        width: rem(180px);
+        height: rem(180px);
     }
 }

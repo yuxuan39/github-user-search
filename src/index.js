@@ -25,7 +25,12 @@ searchBtn.addEventListener('click', evt => {
           container.classList = 'container'
           let p = document.createElement('p')
           p.innerText = data.login
+          
+          let img = document.createElement('img')
+          let url = data.avatar_url
+          img.src = url
           container.appendChild(p)
+          container.appendChild(img)
           user.appendChild(container)
         })
 
@@ -38,7 +43,7 @@ searchBtn.addEventListener('click', evt => {
 const HOST = 'https://api.github.com/search/users'
 
 const getUser = value => {
-  return fetch(`${HOST}?q=${value}&per_page=50&page=1`, {
+  return fetch(`${HOST}?q=${value}&per_page=48&page=1`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
