@@ -6,6 +6,7 @@ const searchInput = document.getElementById('search-bar')
 // const photo = document.getElementById('photo')
 // const following = document.getElementById('following')
 const user = document.getElementById('user')
+const load = document.getElementById('load-btn')
 
 searchBtn.addEventListener('click', evt => {
   const value = searchInput.value
@@ -25,7 +26,7 @@ searchBtn.addEventListener('click', evt => {
           container.classList = 'container'
           let p = document.createElement('p')
           p.innerText = data.login
-          
+
           let img = document.createElement('img')
           let url = data.avatar_url
           img.src = url
@@ -33,7 +34,7 @@ searchBtn.addEventListener('click', evt => {
           container.appendChild(img)
           user.appendChild(container)
         })
-
+      load.style.visibility = 'visible'
       // userdata.innerText = 'getData[0].login'
       // photo.innerHTML = '<a href="#"><img src="mdn-logo-sm.png" alt="MDN"></a>'
     })
