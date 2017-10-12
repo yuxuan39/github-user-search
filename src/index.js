@@ -8,12 +8,29 @@ const searchInput = document.getElementById('search-bar')
 const user = document.getElementById('user')
 const loadBtn = document.getElementById('load-btn')
 
-searchBtn.addEventListener('click', evt => {
-  // if(container){
-  //   user.removeChild(container)
-  // }
+const clearUsers = () => {
+  user.innerHTML = ''
+}
+
+const renderAUser = user => {
+  let container = document.createElement('div')
+  container.classList = 'container'
+  let p = document.createElement('p')
+  p.innerText = user.login
+
+  let img = document.createElement('img')
+  let url = user.avatar_url
+  img.src = url
+  container.appendChild(p)
+  container.appendChild(img)
+  user.appendChild(container)
+}
+
+const renderUsers = () => {
+  clearUsers()
+
   const value = searchInput.value
-  getUser(value)
+  getUsers(value)
     .then(rawData => {
       const data = rawData.items
       const getData = data
@@ -23,24 +40,24 @@ searchBtn.addEventListener('click', evt => {
             avatar_url: mainData.avatar_url
           }
         })
-        .map(data => {
-          let container = document.createElement('div')
-          container.classList = 'container'
-          let p = document.createElement('p')
-          p.innerText = data.login
-
-          let img = document.createElement('img')
-          let url = data.avatar_url
-          img.src = url
-          container.appendChild(p)
-          container.appendChild(img)
-          user.appendChild(container)
+        .map(user => {
+          renderAUser(user)
         })
       loadBtn.style.visibility = 'visible'
       // userdata.innerText = 'getData[0].login'
       // photo.innerHTML = '<a href="#"><img src="mdn-logo-sm.png" alt="MDN"></a>'
     })
     .catch(err => console.log('err', err))
+}
+
+searchBtn.addEventListener('click', evt => {
+  renderUsers()
+})
+
+document.body.addEventListener('keydown', evt => {
+  if (evt.keyCode === 13) {
+    renderUsers()
+  }
 })
 
 loadBtn.addEventListener('click', evt => {
@@ -76,8 +93,9 @@ loadBtn.addEventListener('click', evt => {
 
 const HOST = 'https://api.github.com/search/users'
 
-const getUser = value => {
-  return fetch(`${HOST}?q=${value}&per_page=48&page=1`, {
+const getUsers = value => {
+  const url = `${HOST}?q=${value}+type:user+in:login&per_page=48&page=1`
+  return fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
