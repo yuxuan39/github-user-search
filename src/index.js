@@ -4,19 +4,17 @@ const searchBtn = document.getElementById('search-btn')
 const searchInput = document.getElementById('search-bar')
 const user = document.getElementById('user')
 const loadBtn = document.getElementById('load-btn')
-const loader = document.getElementById('loader')
+const loader = document.querySelector('.loader')
 
 const clearUsers = () => {
   user.innerHTML = ''
 }
 
 searchBtn.addEventListener('click', evt => {
-  loadBtn.style.visibility = 'none'
   renderUsers()
 })
 
 document.body.addEventListener('keydown', evt => {
-  loadBtn.style.visibility = 'none'
   if (evt.keyCode === 13) {
     renderUsers()
   }
@@ -24,13 +22,13 @@ document.body.addEventListener('keydown', evt => {
 
 const renderUsers = () => {
   clearUsers()
-  loader.style.display = 'block'
+  loader.style.visibility = 'visible'
   const value = searchInput.value
   getUsers(value)
     .then(rawData => {
       if (rawData.total_count === 0) {
-        loadBtn.style.visibility = 'none'
-        loader.style.display = 'none'
+        loadBtn.style.visibility = 'hidden'
+        loader.style.visibility = 'hidden'
         console.log('not found')
         let warn = document.createElement('p')
         warn.innerText = 'Not Found'
@@ -39,7 +37,7 @@ const renderUsers = () => {
       if (rawData.total_count >= 24) {
         setTimeout(function() {
           loadBtn.style.visibility = 'visible'
-        }, 1500)
+        }, 1200)
       }
       const data = rawData.items
       const getData = data
@@ -51,14 +49,14 @@ const renderUsers = () => {
           }
         })
         .map(aUser => {
-          loader.style.display = 'none'
+          loader.style.visibility = 'hidden'
           renderAUser(aUser)
         })
       // userdata.innerText = 'getData[0].login'
       // photo.innerHTML = '<a href="#"><img src="mdn-logo-sm.png" alt="MDN"></a>'
     })
     .catch(err => {
-      loader.style.display = 'none'
+      loader.style.visibility = 'none'
       console.log('err', err)
     })
 }
@@ -82,6 +80,7 @@ const renderAUser = aUser => {
 }
 
 loadBtn.addEventListener('click', evt => {
+  loader.style.visibility = 'visible'
   const value = searchInput.value
   nextUserPage(value)
     .then(rawData => {
@@ -94,6 +93,7 @@ loadBtn.addEventListener('click', evt => {
           }
         })
         .map(data => {
+          loader.style.visibility = 'hidden'
           let container = document.createElement('div')
           container.classList = 'container'
           let p = document.createElement('p')
@@ -109,7 +109,10 @@ loadBtn.addEventListener('click', evt => {
       // userdata.innerText = 'getData[0].login'
       // photo.innerHTML = '<a href="#"><img src="mdn-logo-sm.png" alt="MDN"></a>'
     })
-    .catch(err => console.log('err', err))
+    .catch(err => {
+      loader.style.visibility = 'hidden'
+      console.log('err', err)
+    })
 })
 
 const HOST = 'https://api.github.com/search/users'
