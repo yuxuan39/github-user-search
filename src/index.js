@@ -12,19 +12,15 @@ const clearUsers = () => {
   user.innerHTML = ''
 }
 
-const renderAUser = user => {
-  let container = document.createElement('div')
-  container.classList = 'container'
-  let p = document.createElement('p')
-  p.innerText = user.login
+searchBtn.addEventListener('click', evt => {
+  renderUsers()
+})
 
-  let img = document.createElement('img')
-  let url = user.avatar_url
-  img.src = url
-  container.appendChild(p)
-  container.appendChild(img)
-  user.appendChild(container)
-}
+document.body.addEventListener('keydown', evt => {
+  if (evt.keyCode === 13) {
+    renderUsers()
+  }
+})
 
 const renderUsers = () => {
   clearUsers()
@@ -40,8 +36,8 @@ const renderUsers = () => {
             avatar_url: mainData.avatar_url
           }
         })
-        .map(user => {
-          renderAUser(user)
+        .map(aUser => {
+          renderAUser(aUser)
         })
       loadBtn.style.visibility = 'visible'
       // userdata.innerText = 'getData[0].login'
@@ -50,15 +46,19 @@ const renderUsers = () => {
     .catch(err => console.log('err', err))
 }
 
-searchBtn.addEventListener('click', evt => {
-  renderUsers()
-})
+const renderAUser = aUser => {
+  let container = document.createElement('div')
+  container.classList = 'container'
+  let p = document.createElement('p')
+  p.innerText = aUser.login
 
-document.body.addEventListener('keydown', evt => {
-  if (evt.keyCode === 13) {
-    renderUsers()
-  }
-})
+  let img = document.createElement('img')
+  let url = aUser.avatar_url
+  img.src = url
+  container.appendChild(p)
+  container.appendChild(img)
+  user.appendChild(container)
+}
 
 loadBtn.addEventListener('click', evt => {
   const value = searchInput.value
