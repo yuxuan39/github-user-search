@@ -9,9 +9,9 @@ html {
 }
 
 body {
-    background-attachment: fixed;
     background-repeat: no-repeat;
     background: -webkit-linear-gradient( rgba(135, 70, 255, 0.4), rgba(135, 60, 255, 0) 80%), -webkit-linear-gradient( -45deg, rgba(120, 155, 255, 0.9) 25%, rgba(250, 165, 80, 0.9) 75%);
+    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;

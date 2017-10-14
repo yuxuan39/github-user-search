@@ -7,7 +7,7 @@ const loadBtn = document.getElementById('load-btn')
 const loader = document.querySelector('.loader')
 
 const clearUsers = () => {
-  user.innerHTML = ''
+  user.innerHTML = ''  
 }
 
 searchBtn.addEventListener('click', evt => {
@@ -33,6 +33,7 @@ const renderUsers = () => {
         let warn = document.createElement('p')
         warn.innerText = 'Not Found'
         warn.classList = 'warn'
+        user.appendChild(warn)
       }
       if (rawData.total_count >= 24) {
         setTimeout(function() {
