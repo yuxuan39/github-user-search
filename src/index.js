@@ -82,6 +82,8 @@ const renderUsers = () => {
 
 const renderUserData = userData => {
   let container = document.createElement('div')
+  let span = document.createElement('span')
+  span.innerText = userData.login
   container.classList = 'container'
   let p = document.createElement('p')
   p.innerText = userData.login
@@ -93,6 +95,7 @@ const renderUserData = userData => {
   let url = userData.avatar_url
   img.src = url
   a.appendChild(img)
+  container.appendChild(span)
   container.appendChild(p)
   container.appendChild(a)
   user.appendChild(container)
@@ -155,10 +158,3 @@ const getNextUserPage = inputText => {
   return getUsersByPage(inputText, nextPage)
 }
 
-// const getUsers = value => {
-//   const url = `${HOST}?q=${value}+type:user+in:login&per_page=24&page=1`
-//   return fetch(url, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
