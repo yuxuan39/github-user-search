@@ -111,7 +111,8 @@ loadBtn.addEventListener('click', evt => {
         .map(mainData => {
           return {
             login: mainData.login,
-            avatar_url: mainData.avatar_url
+            avatar_url: mainData.avatar_url,
+            html_url: mainData.html_url
           }
         })
         .map(userData => {
@@ -157,4 +158,3 @@ const getNextUserPage = inputText => {
   const nextPage = currentPage
   return getUsersByPage(inputText, nextPage)
 }
-

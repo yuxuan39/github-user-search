@@ -75,15 +75,6 @@ body {
     animation: spin 2s linear infinite;
 }
 
-@-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -125,7 +116,8 @@ body {
 span {
     visibility: hidden;
     font-size: rem(20px);
-    color: #000000;
+    color: rgba(73, 73, 73, 0.712);
+    padding: rem(4px);
     background: rgba(255, 255, 255, 0.4);
     padding: rem(4px);
     border-radius: rem(3px);
